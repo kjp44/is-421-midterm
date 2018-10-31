@@ -64,4 +64,10 @@ class CarTest extends TestCase
         $car = Car::inRandomOrder()->first();
         $this->assertInternalType('int', (int)$car->year);
     }
+
+    public function testCarMake()
+    {
+        $car = Car::inRandomOrder()->first();
+        $this->assertTrue(in_array($car->make, array('Ford', 'Toyota', 'Honda')));
+    }
 }
