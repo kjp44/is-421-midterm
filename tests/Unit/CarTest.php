@@ -37,4 +37,14 @@ class CarTest extends TestCase
             )
         );
     }
+
+    public function testCarYearUpdate()
+    {
+        $car = Car::inRandomOrder()->first();
+        $this->assertTrue(
+            (DB::table('cars')
+                ->where('id', $car->id)
+                ->update(['year' => 2000])) == 1
+        );
+    }
 }
