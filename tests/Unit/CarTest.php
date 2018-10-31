@@ -58,4 +58,10 @@ class CarTest extends TestCase
     {
         $this->assertTrue(Car::count() == 50);
     }
+
+    public function testCarYearIsInteger()
+    {
+        $car = Car::inRandomOrder()->first();
+        $this->assertInternalType('int', (int)$car->year);
+    }
 }
