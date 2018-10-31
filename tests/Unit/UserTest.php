@@ -49,4 +49,11 @@ class UserTest extends TestCase
             ->update(['name' => 'Steve Smith'])) == 1
         );
     }
+
+    public function testUserDelete()
+    {
+        $user = User::inRandomOrder()->first();
+        $this->assertTrue(( DB::table('users')->where('id', $user->id)->delete())==1);
+        dd($user->id);
+    }
 }
