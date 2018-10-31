@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Faker\Factory as Faker;
 use Tests\TestCase;
 use App\Car;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 
@@ -43,6 +44,8 @@ class CarTest extends TestCase
 
     public function testTableSeederCount()
     {
+        Artisan::call('migrate:refresh');
+        $this->seed('CarsTableSeeder');
         $this->assertTrue(Car::count() == 50);
     }
 

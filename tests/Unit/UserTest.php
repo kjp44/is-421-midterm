@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Faker\Factory as Faker;
 use Tests\TestCase;
 use App\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class UserTest extends TestCase
@@ -41,6 +42,8 @@ class UserTest extends TestCase
 
     public function testTableSeederCount()
     {
+        Artisan::call('migrate:refresh');
+        $this->seed('UsersTableSeeder');
         $this->assertTrue(User::count() == 50);
     }
 }
