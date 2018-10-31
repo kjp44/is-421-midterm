@@ -52,6 +52,10 @@ class CarTest extends TestCase
     {
         $car = Car::inRandomOrder()->first();
         $this->assertTrue(( DB::table('cars')->where('id', $car->id)->delete())==1);
-        dd($car->id);
+    }
+
+    public function testTableSeederCount()
+    {
+        $this->assertTrue(Car::count() == 50);
     }
 }
