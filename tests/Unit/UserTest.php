@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Console\Factories;
+use Database\Seeds\UsersTableSeeder;
 
 class UserTest extends TestCase
 {
@@ -54,6 +55,10 @@ class UserTest extends TestCase
     {
         $user = User::inRandomOrder()->first();
         $this->assertTrue(( DB::table('users')->where('id', $user->id)->delete())==1);
-        dd($user->id);
+    }
+
+    public function testTableSeederCount()
+    {
+        $this->assertTrue(User::count() == 50);
     }
 }
