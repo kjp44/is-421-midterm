@@ -47,4 +47,11 @@ class CarTest extends TestCase
                 ->update(['year' => 2000])) == 1
         );
     }
+
+    public function testCarDelete()
+    {
+        $car = Car::inRandomOrder()->first();
+        $this->assertTrue(( DB::table('cars')->where('id', $car->id)->delete())==1);
+        dd($car->id);
+    }
 }
