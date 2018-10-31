@@ -25,33 +25,20 @@ class CarTest extends TestCase
         $car->year = $faker->biasedNumberBetween(1950, 2018, 'sqrt');
         $car->created_at = now();
         $car->updated_at = now();
-        $this->assertTrue(
-            DB::table('cars')->insert(
-                [
-                    'make' => $car->make,
-                    'model' => $car->model,
-                    'year' => $car->year,
-                    'created_at' => $car->created_at,
-                    'updated_at' => $car->updated_at
-                ]
-            )
-        );
+        $this->assertTrue($car->save());
     }
 
     public function testCarYearUpdate()
     {
         $car = Car::inRandomOrder()->first();
-        $this->assertTrue(
-            (DB::table('cars')
-                ->where('id', $car->id)
-                ->update(['year' => 2000])) == 1
-        );
+        $car->year = 2000;
+        $this->assertTrue($car->save());
     }
 
     public function testCarDelete()
     {
         $car = Car::inRandomOrder()->first();
-        $this->assertTrue(( DB::table('cars')->where('id', $car->id)->delete())==1);
+        $this->assertTrue($car->delete());
     }
 
     public function testTableSeederCount()

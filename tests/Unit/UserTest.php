@@ -23,33 +23,20 @@ class UserTest extends TestCase
         $user->email_verified_at = now();
         $user->password = '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm';
         $user->remember_token = str_random(10);
-        $this->assertTrue(
-            DB::table('users')->insert(
-                [
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'email_verified_at' => $user->email_verified_at,
-                    'password' => $user->password,
-                    'remember_token' => $user->remember_token
-                ]
-            )
-        );
+        $this->assertTrue($user->save());
     }
 
     public function testUserNameUpdate()
     {
         $user = User::inRandomOrder()->first();
-        $this->assertTrue(
-            (DB::table('users')
-            ->where('id', $user->id)
-            ->update(['name' => 'Steve Smith'])) == 1
-        );
+        $user->name = 'Steve Smith';
+        $this->assertTrue($user->save());
     }
 
     public function testUserDelete()
     {
         $user = User::inRandomOrder()->first();
-        $this->assertTrue(( DB::table('users')->where('id', $user->id)->delete())==1);
+        $this->assertTrue($user->delete());
     }
 
     public function testTableSeederCount()
