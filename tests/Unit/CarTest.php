@@ -1,0 +1,40 @@
+<?php
+
+namespace Tests\Unit;
+
+use Faker\Factory as Faker;
+use Tests\TestCase;
+use App\Car;
+use Illuminate\Support\Facades\DB;
+
+
+class CarTest extends TestCase
+{
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testCarInsert()
+    {
+        $faker = Faker::create();
+        $faker->addProvider(new \Faker\Provider\Fakecar($faker));
+        $car = new Car();
+        $car->make = $faker->randomElement($array = array ('Ford','Toyota','Honda'));
+        $car->model = $faker->vehicleModel;
+        $car->year = $faker->biasedNumberBetween(1950, 2018, 'sqrt');
+        $car->created_at = now();
+        $car->updated_at = now();
+        $this->assertTrue(
+            DB::table('cars')->insert(
+                [
+                    'make' => $car->make,
+                    'model' => $car->model,
+                    'year' => $car->year,
+                    'created_at' => $car->created_at,
+                    'updated_at' => $car->updated_at
+                ]
+            )
+        );
+    }
+}

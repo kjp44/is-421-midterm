@@ -4,13 +4,8 @@ namespace Tests\Unit;
 
 use Faker\Factory as Faker;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Database\Console\Factories;
-use Database\Seeds\UsersTableSeeder;
 
 class UserTest extends TestCase
 {

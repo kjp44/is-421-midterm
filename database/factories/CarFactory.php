@@ -17,7 +17,7 @@ $factory->define(App\Car::class, function (Faker $faker) {
     $faker->addProvider(new \Faker\Provider\Fakecar($faker));
 
     return [
-        'make' => $faker->vehicleBrand,
+        'make' => $faker->randomElement($array = array ('Ford','Toyota','Honda')),
         'model' => $faker->vehicleModel,
         'year' => $faker->biasedNumberBetween(1950, 2018, 'sqrt'),
     ];
