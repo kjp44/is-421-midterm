@@ -39,4 +39,14 @@ class UserTest extends TestCase
             )
         );
     }
+
+    public function testUserNameUpdate()
+    {
+        $user = User::inRandomOrder()->first();
+        $this->assertTrue(
+            (DB::table('users')
+            ->where('id', $user->id)
+            ->update(['name' => 'Steve Smith'])) == 1
+        );
+    }
 }
