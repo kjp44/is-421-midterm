@@ -58,7 +58,7 @@ class CarTest extends TestCase
     public function testCarMakeIsValid()
     {
         $car = Car::inRandomOrder()->first();
-        $this->assertTrue(in_array($car->make, array('Ford', 'Toyota', 'Honda')));
+        $this->assertContains($car->make, ['Ford', 'Toyota', 'Honda']);
     }
 
     public function testCarModelIsString()
